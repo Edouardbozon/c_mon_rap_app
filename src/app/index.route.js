@@ -7,19 +7,19 @@ export function routerConfig ($routeProvider) {
       controllerAs: 'main'
     })
     .when('/users', {
-      templateUrl: 'app/main/main.html',
+      templateUrl: 'app/users/users.html',
       controller: 'UsersController',
       controllerAs: 'users'
     })
     .when('/matches', {
-      templateUrl: 'app/main/main.html',
+      templateUrl: 'app/matches/matches.html',
       controller: 'MatchesController',
       controllerAs: 'matches'
     })
     .when('/messages', {
-      templateUrl: 'app/main/main.html',
-      controller: 'MessageController',
-      controllerAs: 'message'
+      templateUrl: 'app/messages/messages.html',
+      controller: 'MessagesController',
+      controllerAs: 'messages'
     })
     .otherwise({
       redirectTo: '/'
