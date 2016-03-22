@@ -3,11 +3,11 @@
     <md-button ng-href="/" class="logo">Tinder++</md-button>
 
     <section flex layout="row" layout-align="left center">
-        <md-button ng-href="#/users">Users</md-button>
-        <md-button ng-href="#/matches">Matchs</md-button>
-        <md-button ng-href="#/messages">Messages</md-button>
+        <md-button ng-href="#/users" ng-show="$root.isConnected">Users</md-button>
+        <md-button ng-href="#/matches" ng-show="$root.isConnected">Matchs</md-button>
+        <md-button ng-href="#/messages" ng-show="$root.isConnected">Messages</md-button>
     </section>
 
-    <md-button class="acme-navbar-text" class="md-raised" ng-href="#/profile">My profile</md-button>
+    <md-button class="acme-navbar-text" class="md-raised" ng-href="#/profile" ng-show="$root.isConnected">My profile</md-button>
 
 </md-toolbar>

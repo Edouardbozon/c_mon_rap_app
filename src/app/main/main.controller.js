@@ -1,32 +1,28 @@
 export class MainController {
-  constructor ($timeout, webDevTec, toastr) {
-    'ngInject';
+    constructor (Facebook, $rootScope) {
+        'ngInject';
 
-    this.awesomeThings = [];
-    this.classAnimation = '';
-    this.creationDate = 1458166864978;
-    this.toastr = toastr;
+        this.Facebook = Facebook;
+        this.$rootScope = $rootScope;
 
-    this.activate($timeout, webDevTec);
-  }
+        $rootScope.isConnected = false;
+        $rootScope.user = {};
 
-  activate($timeout, webDevTec) {
-    this.getWebDevTec(webDevTec);
-    $timeout(() => {
-      this.classAnimation = 'rubberBand';
-    }, 4000);
-  }
+    }
 
-  getWebDevTec(webDevTec) {
-    this.awesomeThings = webDevTec.getTec();
+    log(){
+        this.Facebook.login((response)=> {
+            if(response.status === 'connected' && this.$rootScope.isConnected === false){
+                this.$rootScope.isConnected = true;
+                this.me();
+            }
+        });
+    }
 
-    angular.forEach(this.awesomeThings, (awesomeThing) => {
-      awesomeThing.rank = Math.random();
-    });
-  }
+    me() {
+        this.Facebook.api('/me', (response)=> {
+            this.$rootScope.user = response;
+        });
+    };
 
-  showToastr() {
-    this.toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-    this.classAnimation = '';
-  }
 }
