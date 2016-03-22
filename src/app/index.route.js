@@ -21,6 +21,11 @@ export function routerConfig ($routeProvider) {
       controller: 'MessagesController',
       controllerAs: 'messages'
     })
+    .when('/profile', {
+      templateUrl: 'app/profile/profile.html',
+      controller: 'ProfileController',
+      controllerAs: 'profile'
+    })
     .otherwise({
       redirectTo: '/'
     });
