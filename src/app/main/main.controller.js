@@ -12,17 +12,16 @@ export class MainController {
 
     log(){
         this.Facebook.login((response)=> {
-            if(response.status === 'connected' && this.$rootScope.isConnected === false){
+            if(response.status === 'connected'){
                 this.$rootScope.isConnected = true;
                 this.me();
             }
         });
     }
 
-    me() {
+    me(){
         this.Facebook.api('/me', (response)=> {
             this.$rootScope.user = response;
         });
-    };
-
+    }
 }

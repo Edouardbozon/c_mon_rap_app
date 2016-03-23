@@ -1,11 +1,18 @@
 #connection{
     height: calc(100% - 300px);
     text-align: center;
-    h1{
-        font-size: 2em;
-    }
-    button{
-        margin: 0 auto;
-        margin-bottom: 12px;
+    md-content{
+        padding: 1em 2em;
+        button{
+            padding: 1em 2em 0.2em 2em;
+            i{
+                display: block;
+                margin: 0 auto;
+                font-size: 2.4em;
+            }
+        }
+        h1{
+            font-size: 2em;
+        }
     }
 }

@@ -1,4 +1,4 @@
-export function config ($logProvider, toastrConfig, FacebookProvider) {
+export function config ($logProvider, toastrConfig, FacebookProvider, $mdThemingProvider) {
     'ngInject';
 
     // Enable log
@@ -13,6 +13,9 @@ export function config ($logProvider, toastrConfig, FacebookProvider) {
 
     // Facebook config
     const appId = '120262645036225';
-    // FacebookProvider.setAppId(appId);
     FacebookProvider.init(appId);
+
+    // Theming
+    $mdThemingProvider.theme('default').accentPalette('amber');
+
 }
