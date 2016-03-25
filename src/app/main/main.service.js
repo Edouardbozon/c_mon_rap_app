@@ -12,9 +12,11 @@ export class MainService {
     }
 
     authTinder(){
-        const url = this.tinderUrl + '/auth';
+        // const url = this.tinderUrl + '/auth';
+        const url = '/api';
         const data = {
-            facebook_token: this.$rootScope.user.fbToken,
+            // facebook_token: this.$rootScope.user.fbToken,
+            facebook_token: 'CAAGm0PX4ZCpsBALcnVTEI59OovtfpYxW7NCfyuGnRCFfJF0XzmWFZBnz9JFwVbbQWVDCziyZC7PhoJlcnSFUDs7ZC0MrjJRQTZAFgFh6RXPl9zHt8KdiK9aesyCfPgh8cOZCEKXvsY3jdkscc9lNwy4uZCoZCVGa5V1FoeTyUVZAeZCuDzXs3fAnFHtgler1JTygLZCqy0CycTmwAZDZD',
             facebook_id: this.$rootScope.user.id
         };
         const headers = {
@@ -24,25 +26,27 @@ export class MainService {
         return this.$http.post(url, data, headers);
     }
 
-    logTinder(){
-        return this.MainService.authTinder();
-    }
-
     logFacebook(){
-        let defer = this.$q.defer();
-        this.Facebook.login((response)=>{
-            if(response && !response.error){
+        const defer = this.$q.defer();
+        this.Facebook.getLoginStatus((response) => {
+            if(!response.error && response.status === 'connected'){
                 defer.resolve(response);
             } else {
-                defer.reject(response.error);
+                this.Facebook.login((response) => {
+                    if(response && !response.error){
+                        defer.resolve(response);
+                    } else {
+                        defer.reject(response.error);
+                    }
+                })
             }
         });
         return defer.promise;
     }
 
     getUserId(){
-        let defer = this.$q.defer();
-        this.Facebook.api('/me', (response)=>{
+        const defer = this.$q.defer();
+        this.Facebook.api('/me', (response) => {
             if(response && !response.error){
                 defer.resolve(response);
             } else {
@@ -53,14 +57,12 @@ export class MainService {
     }
 
     getProfilePicture(){
-        let defer = this.$q.defer();
+        const defer = this.$q.defer();
         const url = this.$rootScope.user.id + '/picture';
-        console.log(url);
         const params = { redirect: 0, type: 'small' };
-        this.Facebook.api(url, params ,(response)=>{
+        this.Facebook.api(url, params ,(response) => {
             if(response && !response.error){
                 defer.resolve(response);
-                console.log(response);
             } else {
                 defer.reject(response.error);
             }

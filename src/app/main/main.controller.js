@@ -10,33 +10,34 @@ export class MainController {
         $rootScope.user = {
             id: undefined,
             name: undefined,
-            isConnected: false,
-            fbToken: undefined
+            fbToken: undefined,
+            isConnected: false
         };
     }
 
-    logTinder(){
-        this.MainService.authTinder().then((response) => {
-            this.$log(response);
+    logFacebook(){
+        this.MainService
+        .logFacebook()
+        .then((response) => {
+            this.getUserId();
+            this.$rootScope.user.fbToken = response.authResponse.accessToken;
+            this.$rootScope.user.isConnected = true;
         })
+        .catch((error) => {
+            this.$log.error('XHR Failed to log in Facebook API.\n' + angular.toJson(error.data, true));
+        });
     }
 
-    logFacebook(){
-        if(this.$rootScope.user.isConnected === false){
-            this.MainService
-            .logFacebook()
-            .then((response) => {
-                if(response.status === 'connected'){
-                    this.getUserId();
-
-                    this.$rootScope.user.fbToken = response.authResponse.accessToken;
-                    this.$rootScope.user.isConnected = true;
-                }
-            })
-            .catch((error) => {
-                this.$log.error('XHR Failed to log in Facebook API.\n' + angular.toJson(error.data, true));
-            });
-        }
+    logTinder(){
+        this.MainService
+        .authTinder()
+        .then((response) => {
+            this.$log(response.data);
+            // console.log(response.data);
+        })
+        .catch((error) => {
+            this.$log.error('XHR Failed to log in Tinder API.\n' + angular.toJson(error.data, true));
+        });
     }
 
     getUserId(){
@@ -46,6 +47,7 @@ export class MainController {
             this.$rootScope.user.id = response.id;
             this.$rootScope.user.name = response.name;
             this.getProfilePicture();
+            this.logTinder();
         }).catch((error) => {
             this.$log.error('XHR Failed to get userID from Facebook API.\n' + angular.toJson(error.data, true));
         });
