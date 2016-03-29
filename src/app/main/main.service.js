@@ -7,26 +7,9 @@ export class MainService {
         this.Facebook = Facebook;
         this.$q = $q;
 
-        this.tinderUrl = 'https://api.gotinder.com';
-
     }
 
-    authTinder(){
-        // const url = this.tinderUrl + '/auth';
-        const url = '/api';
-        const data = {
-            // facebook_token: this.$rootScope.user.fbToken,
-            facebook_token: 'CAAGm0PX4ZCpsBALcnVTEI59OovtfpYxW7NCfyuGnRCFfJF0XzmWFZBnz9JFwVbbQWVDCziyZC7PhoJlcnSFUDs7ZC0MrjJRQTZAFgFh6RXPl9zHt8KdiK9aesyCfPgh8cOZCEKXvsY3jdkscc9lNwy4uZCoZCVGa5V1FoeTyUVZAeZCuDzXs3fAnFHtgler1JTygLZCqy0CycTmwAZDZD',
-            facebook_id: this.$rootScope.user.id
-        };
-        const headers = {
-            'Content-type': 'application/json',
-            'User-agent': 'User-Agent: Tinder/3.0.4 (iPhone; iOS 7.1; Scale/2.00)'
-        };
-        return this.$http.post(url, data, headers);
-    }
-
-    logFacebook(){
+    facebookAuth(){
         const defer = this.$q.defer();
         this.Facebook.getLoginStatus((response) => {
             if(!response.error && response.status === 'connected'){
@@ -44,9 +27,10 @@ export class MainService {
         return defer.promise;
     }
 
-    getUserId(){
+    getProfileUser(){
         const defer = this.$q.defer();
-        this.Facebook.api('/me', (response) => {
+        const userID = this.$rootScope.user.id;
+        this.Facebook.api(userID, (response) => {
             if(response && !response.error){
                 defer.resolve(response);
             } else {
@@ -61,6 +45,19 @@ export class MainService {
         const url = this.$rootScope.user.id + '/picture';
         const params = { redirect: 0, type: 'small' };
         this.Facebook.api(url, params ,(response) => {
+            if(response && !response.error){
+                defer.resolve(response);
+            } else {
+                defer.reject(response.error);
+            }
+        });
+        return defer.promise;
+    }
+
+    getUserPhotos(){
+        const defer = this.$q.defer();
+        const url = '/me/photos';
+        this.Facebook.api(url, (response) => {
             if(response && !response.error){
                 defer.resolve(response);
             } else {

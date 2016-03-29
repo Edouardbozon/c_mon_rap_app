@@ -10,6 +10,7 @@ var browserSyncSpa = require('browser-sync-spa');
 var util = require('util');
 
 var proxyMiddleware = require('http-proxy-middleware');
+var nodemon = require('gulp-nodemon');
 
 function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
@@ -33,18 +34,19 @@ function browserSyncInit(baseDir, browser) {
     *
     * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
     */
+
     const options = {
-        target: 'https://api.gotinder.com/auth',
-        changeOrigin: true
+        target: 'http://localhost:3200',
+        port: 3200
     };
 
-    server.middleware = proxyMiddleware('/api', options);
+    // server.middleware = proxyMiddleware('/', options);
 
     browserSync.instance = browserSync.init({
         startPath: '/',
         server: server,
         browser: browser,
-        port: 8080
+        port: 3100
     });
 }
 
