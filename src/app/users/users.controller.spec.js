@@ -1,7 +1,7 @@
 // describe('controllers', () => {
 //   let vm;
 //
-//   beforeEach(angular.mock.module('tinder-web-app'));
+//   beforeEach(angular.mock.module('facebook-dashboard'));
 //
 //   beforeEach(inject(($controller, webDevTec, toastr) => {
 //     spyOn(webDevTec, 'getTec').and.returnValue([{}, {}, {}, {}, {}]);

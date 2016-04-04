@@ -9,7 +9,7 @@ import { MainService } from '../app/main/main.service';
 import { ProfileService } from '../app/profile/profile.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 
-angular.module('tinder-web-app', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ngRoute', 'ngMaterial', 'toastr', 'facebook'])
+angular.module('facebook-dashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ngRoute', 'ngMaterial', 'toastr', 'facebook'])
   .config(config)
   .config(routerConfig)
   .service('MainService', MainService)
