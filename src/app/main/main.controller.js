@@ -31,9 +31,6 @@ export class MainController {
         .then(() => {
             this.getProfileUser();
         })
-        .then(() => {
-            this.getUserPhotos();
-        })
         .finally(() => {
             this.$location.path('/profile');
         })
@@ -59,16 +56,6 @@ export class MainController {
             this.$rootScope.user.name = response.name;
         }).catch((error) => {
             this.$log.error('XHR Failed to get profile user from Facebook API.\n' + angular.toJson(error.data, true));
-        });
-    }
-
-    getUserPhotos(){
-        this.MainService
-        .getUserPhotos()
-        .then((response) => {
-            this.$log.info(response);
-        }).catch((error) => {
-            this.$log.error('XHR Failed to get profile photos from Facebook API.\n' + angular.toJson(error.data, true));
         });
     }
 

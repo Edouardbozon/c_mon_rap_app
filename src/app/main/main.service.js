@@ -54,17 +54,4 @@ export class MainService {
         return defer.promise;
     }
 
-    getUserPhotos(){
-        const defer = this.$q.defer();
-        const url = '/me/photos';
-        this.Facebook.api(url, (response) => {
-            if(response && !response.error){
-                defer.resolve(response);
-            } else {
-                defer.reject(response.error);
-            }
-        });
-        return defer.promise;
-    }
-
 }

@@ -7,13 +7,17 @@ export class ProfileController {
         this.ProfileService = ProfileService;
         this.$log = $log;
 
+        this.getUserPhotos();
+        this.userPhotos = [];
+
     }
 
     getUserPhotos(){
         this.ProfileService
         .getUserPhotos()
         .then((response) => {
-            this.$log.info(response);
+            this.userPhotos = response.photos.data;
+            this.$log.info(this.userPhotos);
         }).catch((error) => {
             this.$log.error('XHR Failed to get profile photos from Facebook API.\n' + angular.toJson(error.data, true));
         });

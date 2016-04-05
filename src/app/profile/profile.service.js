@@ -10,7 +10,7 @@ export class ProfileService {
 
     getUserPhotos(){
         const defer = this.$q.defer();
-        const url = '/me/photos';
+        const url = 'me/?fields=photos{images,likes,comments}';
         this.Facebook.api(url, (response) => {
             if(response && !response.error){
                 defer.resolve(response);
