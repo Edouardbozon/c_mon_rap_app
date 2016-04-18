@@ -2,29 +2,20 @@ export function routerConfig ($routeProvider) {
   'ngInject';
   $routeProvider
     .when('/', {
-      templateUrl: 'app/main/main.html',
-      controller: 'MainController',
-      controllerAs: 'main'
-    })
-    .when('/users', {
-      templateUrl: 'app/users/users.html',
-      controller: 'UsersController',
-      controllerAs: 'users'
-    })
-    .when('/matches', {
-      templateUrl: 'app/matches/matches.html',
-      controller: 'MatchesController',
-      controllerAs: 'matches'
-    })
-    .when('/messages', {
-      templateUrl: 'app/messages/messages.html',
-      controller: 'MessagesController',
-      controllerAs: 'messages'
+      templateUrl: 'app/auth/auth.html',
+      controller: 'AuthController',
+      controllerAs: 'auth'
     })
     .when('/profile', {
       templateUrl: 'app/profile/profile.html',
       controller: 'ProfileController',
-      controllerAs: 'profile'
+      controllerAs: 'profile',
+      resolve: {
+          checkIsConnected: function(AuthService){
+              console.log('test');
+              return AuthService.checkIsConnected();
+          }
+      }
     })
     .otherwise({
       redirectTo: '/'

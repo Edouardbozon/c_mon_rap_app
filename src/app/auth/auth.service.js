@@ -1,11 +1,12 @@
-export class MainService {
-    constructor($http, $rootScope, Facebook, $q){
+export class AuthService {
+    constructor($http, $rootScope, Facebook, $q, $location){
         'ngInject';
 
         this.$rootScope = $rootScope;
         this.$http = $http;
         this.Facebook = Facebook;
         this.$q = $q;
+        this.$location = $location;
 
     }
 
@@ -52,6 +53,16 @@ export class MainService {
             }
         });
         return defer.promise;
+    }
+
+    checkIsConnected(){
+        if (this.$rootScope.user && this.$rootScope.user.isConnected === true) {
+            console.log('connected');
+            this.$location.path('/profile');
+        } else {
+            console.log('redirect to home');
+            this.$location.path('/');
+        }
     }
 
 }

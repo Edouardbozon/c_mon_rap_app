@@ -1,7 +1,6 @@
-<h1>Profile</h1>
 <div layout-align="center">
-    <md-content layout-row>
-        <md-card flex="45" class="md-whiteframe-6dp" ng-repeat="photo in profile.userPhotos">
+    <md-content>
+        <md-card flex="20" class="md-whiteframe-6dp" ng-repeat="photo in profile.userPhotos">
             <img ng-src="{{ photo.images[1].source }}" class="md-card-image" alt="Washed Out">
             <md-card-title>
                 <md-card-title-text>

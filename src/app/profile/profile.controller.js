@@ -6,9 +6,9 @@ export class ProfileController {
         this.$rootScope = $rootScope;
         this.ProfileService = ProfileService;
         this.$log = $log;
+        this.userPhotos = [];
 
         this.getUserPhotos();
-        this.userPhotos = [];
 
     }
 

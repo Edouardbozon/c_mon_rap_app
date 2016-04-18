@@ -1,10 +1,10 @@
-export class MainController {
-    constructor (Facebook, $rootScope, MainService, $log, $location) {
+export class AuthController {
+    constructor (Facebook, $rootScope, AuthService, $log, $location) {
         'ngInject';
 
         this.Facebook = Facebook;
         this.$rootScope = $rootScope;
-        this.MainService = MainService;
+        this.AuthService = AuthService;
         this.$location = $location;
         this.$log = $log;
 
@@ -18,7 +18,7 @@ export class MainController {
     }
 
     logFacebook(){
-        this.MainService
+        this.AuthService
         .facebookAuth()
         .then((response) => {
             this.$rootScope.user.fbAuthToken = response.authResponse.accessToken;
@@ -40,7 +40,7 @@ export class MainController {
     }
 
     getProfilePicture(){
-        this.MainService
+        this.AuthService
         .getProfilePicture()
         .then((response) => {
             this.$rootScope.user.picture = response.data.url;
@@ -50,7 +50,7 @@ export class MainController {
     }
 
     getProfileUser(){
-        this.MainService
+        this.AuthService
         .getProfileUser()
         .then((response) => {
             this.$rootScope.user.name = response.name;
