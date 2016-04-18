@@ -3,13 +3,11 @@
     <md-button ng-href="/" class="logo">Facebook-dashboard</md-button>
 
     <section ng-show="$root.user.isConnected" flex layout="row" layout-align="left center">
-        <md-button ng-href="#/users">Users</md-button>
-        <md-button ng-href="#/matches">Matchs</md-button>
-        <md-button ng-href="#/messages">Messages</md-button>
+        <md-button ng-click="navbar.disconnect()">Disconnect</md-button>
     </section>
 
-    <img id="profilePicture" class="md-whiteframe-6dp" ng-if="$root.user.isConnected" ng-src="{{ $root.user.picture }}" alt="{{ $root.user.name }} picture">
-    <md-button class="acme-navbar-text" class="md-raised" ng-href="#/profile" ng-show="$root.user.isConnected">
+    <img id="DashboardControllerPicture" class="md-whiteframe-6dp" ng-if="$root.user.isConnected" ng-src="{{ $root.user.picture }}" alt="{{ $root.user.name }} picture">
+    <md-button class="acme-navbar-text" class="md-raised" ng-href="#/dashboard" ng-show="$root.user.isConnected">
         {{ $root.user.name }}
     </md-button>
 

@@ -32,7 +32,7 @@ export class AuthController {
             this.getProfileUser();
         })
         .finally(() => {
-            this.$location.path('/profile');
+            this.$location.path('/dashboard');
         })
         .catch((error) => {
             this.$log.error(angular.toJson(error.data, true));

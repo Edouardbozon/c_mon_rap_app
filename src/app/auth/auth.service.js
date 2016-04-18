@@ -57,12 +57,21 @@ export class AuthService {
 
     checkIsConnected(){
         if (this.$rootScope.user && this.$rootScope.user.isConnected === true) {
-            console.log('connected');
-            this.$location.path('/profile');
+            this.$location.path('/dashboard');
         } else {
-            console.log('redirect to home');
             this.$location.path('/');
         }
+    }
+
+    disconnect(){
+        this.$rootScope.user = {
+            id: undefined,
+            name: undefined,
+            fbAuthToken: undefined,
+            isConnected: false,
+            picture: undefined
+        };
+        this.$location.path('/');
     }
 
 }

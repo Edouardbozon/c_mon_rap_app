@@ -6,13 +6,12 @@ export function routerConfig ($routeProvider) {
       controller: 'AuthController',
       controllerAs: 'auth'
     })
-    .when('/profile', {
-      templateUrl: 'app/profile/profile.html',
-      controller: 'ProfileController',
-      controllerAs: 'profile',
+    .when('/dashboard', {
+      templateUrl: 'app/dashboard/dashboard.html',
+      controller: 'DashboardController',
+      controllerAs: 'dashboard',
       resolve: {
           checkIsConnected: function(AuthService){
-              console.log('test');
               return AuthService.checkIsConnected();
           }
       }

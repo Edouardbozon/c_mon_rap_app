@@ -8,7 +8,7 @@ export function NavbarDirective() {
         creationDate: '='
     },
     controller: NavbarController,
-    controllerAs: 'vm',
+    controllerAs: 'navbar',
     bindToController: true
   };
 
@@ -16,8 +16,11 @@ export function NavbarDirective() {
 }
 
 class NavbarController {
-  constructor () {
+  constructor (AuthService) {
     'ngInject';
-
+    this.AuthService = AuthService;
+  }
+  disconnect(){
+      this.AuthService.disconnect();
   }
 }
