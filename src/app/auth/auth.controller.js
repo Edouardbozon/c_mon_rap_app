@@ -1,5 +1,5 @@
 export class AuthController {
-    constructor (Facebook, $rootScope, AuthService, $log, $location) {
+    constructor (Facebook, $rootScope, AuthService, $log, $location, LoaderService) {
         'ngInject';
 
         this.Facebook = Facebook;
@@ -7,6 +7,7 @@ export class AuthController {
         this.AuthService = AuthService;
         this.$location = $location;
         this.$log = $log;
+        this.LoaderService = LoaderService;
 
         $rootScope.user = {
             id: undefined,
@@ -24,6 +25,7 @@ export class AuthController {
             this.$rootScope.user.fbAuthToken = response.authResponse.accessToken;
             this.$rootScope.user.id = response.authResponse.userID;
             this.$rootScope.user.isConnected = true;
+            this.LoaderService.remove(1);
         })
         .then(() => {
             this.getProfilePicture();
@@ -44,6 +46,7 @@ export class AuthController {
         .getProfilePicture()
         .then((response) => {
             this.$rootScope.user.picture = response.data.url;
+            this.LoaderService.remove(1);
         }).catch((error) => {
             this.$log.error('XHR Failed to get profile picture from Facebook API.\n' + angular.toJson(error.data, true));
         });
@@ -54,6 +57,7 @@ export class AuthController {
         .getProfileUser()
         .then((response) => {
             this.$rootScope.user.name = response.name;
+            this.LoaderService.remove(1);
         }).catch((error) => {
             this.$log.error('XHR Failed to get profile user from Facebook API.\n' + angular.toJson(error.data, true));
         });

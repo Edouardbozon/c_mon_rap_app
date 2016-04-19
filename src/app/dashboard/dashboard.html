@@ -1,7 +1,11 @@
-<md-content flex layout-padding>
-    <code>
-        <pre>
-            {{ dashboard.infos }}
-        </pre>
-    </code>
-</md-content>
+<div layout="column" flex ng-cloak>
+  </md-sidenav>
+  <md-toolbar flex="70" class="md-warn">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Dashboard</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    {{ dashboard.infos }}
+  </md-content>
+</div>
