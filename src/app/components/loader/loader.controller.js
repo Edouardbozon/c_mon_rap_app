@@ -1,21 +1,33 @@
 export class LoaderController {
-    constructor(LoaderService, $rootScope, $scope){
+    constructor(LoaderService, $rootScope, $scope, $log){
         'ngInject';
 
         this.LoaderService = LoaderService;
         this.$rootScope = $rootScope;
+        this.$scope = $scope;
+        this.$log = $log;
         this.loadingQueue = 0;
 
-        const loader = $rootScope.$on('Loader:add', (evt, data) => {
-            this.loadingQueue = data;
+        const loaderAdd = $rootScope.$on('Loader:add', (evt, data) => {
+            if(data && data > 0){
+                this.$log.info(evt.name, this.loadingQueue);
+                this.loadingQueue += data;
+            }
         });
 
-        $scope.on('$destroy', () => loader.$destroy() );
+        const loaderRm = $rootScope.$on('Loader:rm', (evt, data) => {
+            if(data && data > 0){
+                this.$log.info(evt.name, this.loadingQueue);
+                this.loadingQueue -= data;
+            }
+        });
 
-    }
+        $scope.$on('$destroy', () => {
+            loaderAdd.$destroy();
+            loaderRm.$destroy();
+            this.loadingQueue = 0;
+        });
 
-    checkIfLoading(){
-        return this.loadingQueue > 0;
     }
 
 }

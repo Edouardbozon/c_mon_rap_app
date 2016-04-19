@@ -26,7 +26,10 @@
 
     <navbar></navbar>
     <ng-view></ng-view>
-    <md-progress-linear id="loadBar" md-mode="indeterminate" ng-if="$root.loadingQueue > 0"></md-progress-linear>
+
+    <div ng-controller="LoaderController as loader">
+        <md-progress-linear id="loadBar" md-mode="indeterminate" ng-if="loader.loadingQueue > 0"></md-progress-linear>
+    </div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

@@ -1,18 +1,17 @@
 export class LoaderService {
-    constructor($rootScope){
-        'ngInject';
-        this.$rootScope = $rootScope;
-        this.$rootScope.loadingQueue = 0;
-    }
+  constructor($rootScope) {
+    'ngInject';
 
-    add(nbr){
-        this.loadingQueue += 1 || nbr;
-        this.$rootScope.$broadcast('Loader:add', this.loadingQueue);
-    }
+    this.$rootScope = $rootScope;
 
-    remove(nbr){
-        this.loadingQueue -= 1 || nbr;
-        this.$rootScope.$broadcast('Loader:remove', this.loadingQueue);
-    }
+  }
+
+  add(nbr) {
+    this.$rootScope.$broadcast('Loader:add', nbr);
+  }
+
+  remove(nbr) {
+    this.$rootScope.$broadcast('Loader:rm', nbr);
+  }
 
 }

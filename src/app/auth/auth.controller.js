@@ -19,18 +19,19 @@ export class AuthController {
     }
 
     logFacebook(){
-        this.AuthService
-        .facebookAuth()
+        this.LoaderService.add(1);
+        this.AuthService.facebookAuth()
         .then((response) => {
             this.$rootScope.user.fbAuthToken = response.authResponse.accessToken;
             this.$rootScope.user.id = response.authResponse.userID;
             this.$rootScope.user.isConnected = true;
-            this.LoaderService.remove(1);
         })
         .then(() => {
+            this.LoaderService.add(1);
             this.getProfilePicture();
         })
         .then(() => {
+            this.LoaderService.add(1);
             this.getProfileUser();
         })
         .finally(() => {
@@ -46,7 +47,6 @@ export class AuthController {
         .getProfilePicture()
         .then((response) => {
             this.$rootScope.user.picture = response.data.url;
-            this.LoaderService.remove(1);
         }).catch((error) => {
             this.$log.error('XHR Failed to get profile picture from Facebook API.\n' + angular.toJson(error.data, true));
         });
@@ -57,7 +57,6 @@ export class AuthController {
         .getProfileUser()
         .then((response) => {
             this.$rootScope.user.name = response.name;
-            this.LoaderService.remove(1);
         }).catch((error) => {
             this.$log.error('XHR Failed to get profile user from Facebook API.\n' + angular.toJson(error.data, true));
         });
