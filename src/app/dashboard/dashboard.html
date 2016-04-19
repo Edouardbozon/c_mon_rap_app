@@ -2,10 +2,25 @@
   </md-sidenav>
   <md-toolbar flex="70" class="md-warn">
     <div class="md-toolbar-tools">
-      <h2 class="md-flex">Dashboard</h2>
+      <h2 class="md-flex">Posts</h2>
     </div>
   </md-toolbar>
   <md-content flex layout-padding>
-    {{ dashboard.infos }}
+    <p ng-repeat="post in dashboard.posts">
+        <strong>
+            {{ post.attachments.data[0].title }} <br>
+            <small>{{ post.attachments.data[0].description }}</small> <br>
+        </strong>
+        <em>
+            {{ post.created_time | date }}
+        </em>
+        <br>
+        <code ng-repeat="like in post.likes.data">
+            {{ like }}
+            <br>
+        </code>
+        <br>
+        __________________________________________________________________________
+    </p>
   </md-content>
 </div>

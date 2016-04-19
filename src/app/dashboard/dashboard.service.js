@@ -8,9 +8,9 @@ export class DashboardService {
 
     }
 
-    getUserPhotos(){
+    getUserPosts(){
         const defer = this.$q.defer();
-        const url = 'me/?fields=photos{images,likes,comments}';
+        const url = 'me?fields=posts{comments,likes,created_time,attachments{description,title}}';
         this.Facebook.api(url, (response) => {
             if(response && !response.error){
                 defer.resolve(response);

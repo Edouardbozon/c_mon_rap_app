@@ -7,22 +7,22 @@ export class DashboardController {
         this.LoaderService = LoaderService;
         this.DashboardService = DashboardService;
         this.$log = $log;
-        this.infos = [];
+        this.posts = [];
 
-        this.getUserPhotos();
+        this.getUserPosts();
 
     }
 
-    getUserPhotos(){
+    getUserPosts(){
         this.LoaderService.add(1);
         this.DashboardService
-        .getUserPhotos()
+        .getUserPosts()
         .then((response) => {
-            this.infos = response.photos.data;
-            this.$log.info(this.infos);
+            this.posts = response.posts.data;
+            this.$log.info(this.posts);
             this.LoaderService.remove(4);
         }).catch((error) => {
-            this.$log.error('XHR Failed to get DashboardController photos from Facebook API.\n' + angular.toJson(error.data, true));
+            this.$log.error('XHR Failed to get DashboardController posts from Facebook API.\n' + angular.toJson(error.data, true));
         });
     }
 
