@@ -52,6 +52,32 @@ md-content {
     overflow: hidden;
 }
 
+.loader_overlay {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.7);
+    transition: opacity 300ms ease;
+    .loader_circle {
+        position: inherit;
+        left:50%;
+        top:50%;
+        margin-left: -50px;
+        margin-top: -50px;
+        transition: opacity 300ms ease;
+    }
+    &.ng-hide{
+        opacity: 0;
+        .loader_circle {
+            opacity: 0;
+        }
+    }
+}
+
+
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
