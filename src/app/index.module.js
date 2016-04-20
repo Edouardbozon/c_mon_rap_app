@@ -7,6 +7,7 @@ import { LoaderService } from '../app/components/loader/loader.service';
 import { LoaderController } from '../app/components/loader/loader.controller';
 import { DashboardService } from '../app/dashboard/dashboard.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
+import { PostAnalytics } from '../app/components/postAnalytics/postAnalytics.directive';
 
 angular.module('facebook-dashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ngRoute', 'ngMaterial', 'toastr', 'facebook'])
   .config(config)
@@ -17,4 +18,5 @@ angular.module('facebook-dashboard', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSa
   .controller('AuthController', AuthController)
   .controller('LoaderController', LoaderController)
   .controller('DashboardController', DashboardController)
-  .directive('navbar', NavbarDirective);
+  .directive('navbar', NavbarDirective)
+  .directive('postAnalytics', PostAnalytics);

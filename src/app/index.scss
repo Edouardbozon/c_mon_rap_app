@@ -60,23 +60,32 @@ md-content {
     top: 0;
     z-index: 3;
     background: rgba(255, 255, 255, 0.7);
-    transition: opacity 300ms ease;
+    opacity:1;
+    transition: opacity 400ms ease;
     .loader_circle {
         position: inherit;
         left:50%;
         top:50%;
         margin-left: -50px;
         margin-top: -50px;
-        transition: opacity 300ms ease;
+        opacity:1;
+        transition: opacity 400ms ease;
     }
     &.ng-hide{
         opacity: 0;
         .loader_circle {
-            opacity: 0;
+            opacity:0;
         }
     }
 }
 
+md-chips md-chip i{
+    position: relative;
+    top: 4px;
+    left: -2px;
+    line-height: 2;
+    font-size: 20px;
+}
 
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject

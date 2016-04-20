@@ -1,26 +1,31 @@
-<div layout="column" flex ng-cloak>
-  </md-sidenav>
-  <md-toolbar flex="70" class="md-warn">
-    <div class="md-toolbar-tools">
-      <h2 class="md-flex">Posts</h2>
+<div layout="column" flex ng-cloak></md-sidenav>
+<md-toolbar class="md-primary md-hue-2">
+  <div class="md-toolbar-tools">
+    <h2 class="md-flex">Posts data</h2>
+  </div>
+</md-toolbar>
+<md-content flex layout-padding>
+
+    <div>
+        <!-- D3 directives -->
+        <post-analytics></post-analytics>
     </div>
-  </md-toolbar>
-  <md-content flex layout-padding>
-    <p ng-repeat="post in dashboard.posts">
-        <strong>
-            {{ post.attachments.data[0].title }} <br>
-            <small>{{ post.attachments.data[0].description }}</small> <br>
-        </strong>
-        <em>
-            {{ post.created_time | date }}
-        </em>
-        <br>
-        <code ng-repeat="like in post.likes.data">
-            {{ like }}
-            <br>
-        </code>
-        <br>
-        __________________________________________________________________________
-    </p>
-  </md-content>
+<br>
+<br>
+<br>
+  <md-list>
+    <md-list-item class="md-3-line" ng-repeat="post in dashboard.posts">
+      <div class=".md-list-item-text">
+        <h1>{{ post.attachments.data[0].title }}</h1>
+        <h3>{{ post.attachments.data[0].description }}</h3>
+        <em>{{ post.created_time | date }}</em>
+        <span ng-repeat="like in post.likes.data">
+              <i class="material-icons">favorite</i>{{ like.name }}
+        </span>
+      </div>
+      <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+  </md-list>
+
+</md-content>
 </div>
